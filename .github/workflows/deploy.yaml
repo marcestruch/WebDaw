@@ -1,0 +1,18 @@
+name: Deploy Laravel Sail (Remote)
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Despliegue de web chunga
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key:  ${{ secrets.LABSUSER }}
+          script: |
+            set -e
+            cd /var/www/html/WebDaw
+            git pull
